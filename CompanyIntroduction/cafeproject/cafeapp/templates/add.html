@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- ADD -->
+<section>
+    <div class="container">
+
+        <div class="order-info">
+            <div class="section-title">
+                <h2>ORDER</h2>
+            </div>
+            <p class="order-info">주문하기</p>
+        </div>
+
+        <div class="container">
+
+            <div class="row order-detail">
+
+                <div class="col-lg-8">
+                    <div>
+                        <h4 class="order-menu">MENU</h4>
+
+                        <div>
+                            {% for menu in menus %}
+                            <tr>
+                                <td>{{ menu.title }}</td>
+                                <td>{{ menu.price }}</td>
+
+                                <td><a href="{% url 'add' menu.id %}">+</a></td><br /><br />
+                            </tr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-4 cart">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <h4 class="cart-title">{{ menu_detail.title }}</h4>
+
+                            <br /><br />
+                            {% if menu_detail.id == 1 %}
+                            <img class="choose_img" src="{% static '/img/cafeimg/americano.jpg' %}" alt="americano">
+                            {% elif menu_detail.id == 2 %}
+                            <img class="choose_img" src="{% static '/img/cafeimg/espresso.jpg' %}" alt="americano">
+                            {% else %}
+                            {% endif %}
+
+                            {% if menu_detail.id == 3 %}
+                            <img class="choose_img" src="{% static '/img/cafeimg/cafelatte.jpg' %}" alt="americano">
+                            {% elif menu_detail.id == 4 %}
+                            <img class="choose_img" src="{% static '/img/cafeimg/caffucino.jpg' %}" alt="americano">
+                            {% else %}
+                            {% endif %}
+
+                            {% if menu_detail.id == 5 %}
+                            <img class="choose_img" src="{% static '/img/cafeimg/vanilla.jpg' %}" alt="americano">
+                            {% elif menu_detail.id == 6 %}
+                            <img class="choose_img" src="{% static '/img/cafeimg/caramel.jpg' %}" alt="americano">
+                            {% else %}
+                            {% endif %}
+
+                            {% if menu_detail.id == 7 %}
+                            <img class="choose_img" src="{% static '/img/cafeimg/chocolate.jpg' %}" alt="americano">
+                            {% elif menu_detail.id == 8 %}
+                            <img class="choose_img" src="{% static '/img/cafeimg/icetea.jpg' %}" alt="americano">
+                            {% else %}
+                            {% endif %}
+                            <tbody>
+                                {% for post in posts %}
+                                <div style="float: right;">
+                                    <td>{{ post.title }}</td>
+                                    <br />
+                                    <td>{{ post.price }}</td>
+                                    <br />
+                                </div>
+                                {% endfor %}
+                            </tbody>
+
+
+
+
+                            <div class="row" style="float: none; margin:0 auto;">
+                                <div class="col-md-9 order-total-price">
+                                    금액
+                                </div>
+                                <div class="col-md-3 order-total-price">
+                                    {{ menu_detail.price }}
+                                </div>
+                            </div>
+                        </div>
+                        <input type="submit" class="pay-button" value="추가 하기">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
